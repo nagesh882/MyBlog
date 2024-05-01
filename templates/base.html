@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block content_title %} {% endblock content_title %}</title>
+        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'css/customestyle.css' %}">
+
+        <style>
+            th, td {
+                padding: 8px;
+                text-align: left;
+            }
+            td {
+                max-width: 200px; /* Adjust the max-width according to your design */
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- I have included here navbar -->
+        {% include "navbar.html" %}
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 mt-3">
+                    {% block msg %}{% endblock msg %}
+                </div>
+            </div>
+
+            <div class="row">
+                {% block side %}
+                {% endblock side %}
+
+                {% block content %}
+                {% endblock content %}
+            </div>
+        </div>
+
+        <script src="{% static 'js/bootstrap.js' %}"></script>
+    </body>
+</html>

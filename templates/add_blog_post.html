@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block msg %}
+
+    {% if messages %}
+        {% for message in messages %}
+            <div {% if message.tags %} class="alert alert-{{message.tags}} alert-dismissible fade show" {% endif %} role="alert">
+                {{message}}
+                
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+{% endblock msg %}
+
+
+{% block content %}
+
+    <div class="col-sm-10 mx-auto">
+        <h4 class="text-white my-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb text-white">
+                    <li class="breadcrumb-item text-white"><a href="#" class="text-decoration-none text-white">Home</a></li>
+                    <li class="breadcrumb-item text-white"><a href="#" class="text-decoration-none text-white">Dashbord</a></li>
+                    <li class="breadcrumb-item active text-white" aria-current="page">Add Blog Post</li>
+                </ol>
+            </nav>
+        </h4>
+
+        <div class="card jumbo-color shadow-lg">
+            <div class="card-body">
+                <form action="" method="POST" novalidate>
+                    {% csrf_token %}
+
+                    <div class="row">
+                        {% for fm in posts %}
+                            <div class="form-group my-2">
+                                {{fm.label_tag}} {{fm}} <small class="text-warning">{{fm.errors | striptags}}</small>
+                            </div>
+                        {% endfor %}
+                    </div>
+        
+                    <input type="submit" value="Add" class="btn btn-primary mt-2" />
+
+                    <a href="{% url 'dashboard' %}" class="btn btn-danger mt-2">Cancel</a>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock content %}
